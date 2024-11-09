@@ -1,0 +1,52 @@
+\section{Notes}
+\subsection{Extracting Secrets from LSA }
+\begin{itemize}
+    \item \href{https://blog.syss.com/posts/powershell-lsa-parsing/}{Extracting Secrets from LSA by Use of PowerShell}
+    \item  \href{https://github.com/cube0x0/MiniDump}{C\# implementation of mimikatz/pypykatz minidump functionality to get credentials from LSASS dumps.}
+    \item \href{https://github.com/skelsec/minidump}{Python library to parse and read Microsoft minidump file format}
+    \item \href{https://formats.kaitai.io/windows_minidump/}{Windows MiniDump: format specification }
+    \item \href{https://ricardojoserf.github.io/nativedump/}{Dumping lsass using only NTAPIs by hand-crafting Minidump files}
+\end{itemize}
+\subsection{Usefull libs}
+\begin{itemize}
+    \item \href{https://learn.microsoft.com/fr-fr/windows/win32/api/tlhelp32/}{tlhelp32.h}
+\end{itemize}
+
+\subsection{Staying Under the Radar}
+
+\begin{itemize}
+    \item \href{https://crypt0ace.github.io/posts/Staying-under-the-Radar/}{Staying Under the Radar - Part 1 - PPID Spoofing and Blocking DLLs}
+    \item \href{https://crypt0ace.github.io/posts/Staying-under-the-Radar-Part-3/}{Staying Under the Radar - Part 3 - Unhooking DLLs}
+\end{itemize}
+
+\subsection{Check sandboxing}
+
+\begin{itemize}
+    \item Call rare-enumated API 
+    \begin{verbatim}
+        if (VirtualAllocExNuma(GetCurrentProcess(), IntPtr.Zero, 0x1000, 0x3000, 0x4, 0) == IntPtr.Zero)
+        {
+            return;
+        }
+    \end{verbatim}
+\end{itemize}
+
+
+
+\subsection{Evade in-memory scan}
+
+\begin{itemize}
+    \item Sleep to evade in-memory scan + check if the emulator did not fast-forward through the sleep instruction
+    \begin{verbatim}
+        var rand = new Random();
+        uint dream = (uint)rand.Next(10000, 20000);
+        double delta = dream / 1000 - 0.5;
+        DateTime before = DateTime.Now;
+        Sleep(dream);
+        if (DateTime.Now.Subtract(before).TotalSeconds < delta)
+        {
+            Console.WriteLine("Charles, get the rifle out. We're being fucked.");
+            return;
+        }
+    \end{verbatim}
+\end{itemize}

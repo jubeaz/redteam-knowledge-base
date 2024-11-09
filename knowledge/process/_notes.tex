@@ -1,0 +1,164 @@
+\section{Notes}
+
+\subsection{Get IAT from process}
+\begin{verbatim}
+    // Get the base address of the current module (EXE)
+    HMODULE hModule = GetModuleHandle(NULL);
+    // Get the address of the IMAGE_DOS_HEADER (the base of the PE file)
+    PIMAGE_DOS_HEADER pDOSHeader = (PIMAGE_DOS_HEADER)hModule;
+
+    // Get the address of the IMAGE_NT_HEADERS
+    PIMAGE_NT_HEADERS pNTHeaders = (PIMAGE_NT_HEADERS)((BYTE*)hModule + pDOSHeader->e_lfanew);
+
+    // Get the address of the IMAGE_IMPORT_DESCRIPTOR (the IAT)
+    PIMAGE_IMPORT_DESCRIPTOR pImportDescriptor = (PIMAGE_IMPORT_DESCRIPTOR)(
+        (BYTE*)hModule + pNTHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress
+    );
+\end{verbatim}
+
+
+\subsection{Process Environment Block (PEB)}
+
+\href{https://github.com/Faran-17/Windows-Internals/blob/main/Processes%20and%20Jobs/Processes/PEB%20-%20Part%201.md}{PEB - Part 1.md}
+
+\subsubsection{Structure}
+\verb+ntdll.lib+
+
+\href{https://metehan-bulut.medium.com/understanding-the-process-environment-block-peb-for-malware-analysis-26315453793f}{PEB fields frequently used by malware developers}, along with brief descriptions of each:
+\begin{itemize}
+    \item 
+    \item \verb+0x002+ \verb+BeingDebugged+, Anti-Debug
+    \item \verb+0x068+ \verb+NtGlobalFlag+, Anti-Debug
+    \item \verb+0x018+ \verb+ProcessHeap+, Anti-Debug
+    \item \verb+0x00c+ \verb+Ldr+, API Hashing
+    \item \verb+0x008+ \verb+ImageBaseAddress+, Process Hollowing
+    \item \verb+0x010+ \verb+ProcessParameters+, UAC Bypass
+\end{itemize}
+
+
+\begin{verbatim}
+typedef struct _LIST_ENTRY {
+    struct _LIST_ENTRY *Flink;
+    struct _LIST_ENTRY *Blink;
+} LIST_ENTRY, *PLIST_ENTRY, PRLIST_ENTRY;
+    
+typedef struct _UNICODE_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+    PWSTR  Buffer;
+} UNICODE_STRING, *PUNICODE_STRING;
+\end{verbatim}
+
+When a process running, Windows OS will allocates a \href{http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FProcess%2FPEB.html}{Process Environment Block (PEB)} structure for the process. The PEB is created by the kernel and it basically contains fields that provide information such as loaded modules, process parameters, environment variables, and many more.
+
+\href{http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FProcess%2FPEB.html}{PEB\_LDR\_DATA} structure that contains information of loaded (EXEs/DLLs) modules, including the doubly-linked list \verb+InMemoryOrderModuleList+ 
+
+\begin{verbatim}
+typedef struct _PEB_LDR_DATA {
+    ULONG                   Length;
+    BOOLEAN                 Initialized;
+    PVOID                   SsHandle;
+    LIST_ENTRY              InLoadOrderModuleList;
+    LIST_ENTRY              InMemoryOrderModuleList;
+    LIST_ENTRY              InInitializationOrderModuleList;
+} PEB_LDR_DATA, *PPEB_LDR_DATA;
+\end{verbatim}
+
+\begin{itemize}
+    \item \verb+Lenght+: Size of structure, used by ntdll.dll as structure version ID.
+    \item \verb+Initialized+ If set, loader data section for current process is initialized.
+    \item \verb+SsHandle+: unknown
+    \item \verb+InLoadOrderModuleList+: doubly linked list containing pointers to \verb+LDR_MODULE+ structure for previous and next module in load order
+    \item \verb+InMemoryOrderModuleList+: same as \verb+InLoadOrderModuleList+ but in memory placement order 
+    \item \verb+InInitializationOrderModuleList+: same as \verb+InLoadOrderModuleList+ but in memory initialization order 
+\end{itemize}
+
+
+\verb+InMemoryOrderModuleList+ a doubly linked list containing pointers to \href{http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FProcess%2FPEB.html}{LDR\_MODULE} structure for previous and next module in memory placement order.
+
+\begin{verbatim}
+typedef struct _LIST_ENTRY {
+    struct _LIST_ENTRY *Flink; // 4 or 8 bytes
+    struct _LIST_ENTRY *Blink; // 4 or 8 bytes
+} LIST_ENTRY, *PLIST_ENTRY, PRLIST_ENTRY;
+
+typedef struct _UNICODE_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+    PWSTR  Buffer;
+} UNICODE_STRING, *PUNICODE_STRING;
+
+typedef struct _LDR_MODULE {
+    LIST_ENTRY              InLoadOrderModuleList;
+    LIST_ENTRY              InMemoryOrderModuleList;
+    LIST_ENTRY              InInitializationOrderModuleList;
+    PVOID                   BaseAddress; // 4 or 8 bytes
+    PVOID                   EntryPoint;  // 4 or 8 bytes
+    ULONG                   SizeOfImage; // 4 bytes
+    UNICODE_STRING          FullDllName;
+    UNICODE_STRING          BaseDllName;
+    ULONG                   Flags;
+    SHORT                   LoadCount;
+    SHORT                   TlsIndex;
+    LIST_ENTRY              HashTableEntry;
+    ULONG                   TimeDateStamp;
+} LDR_MODULE, *PLDR_MODULE;
+\end{verbatim}
+
+
+\subsection{access using assembly}
+
+\begin{verbatim}
+    include <stdio.h>
+    #include <Windows.h>
+    
+    int main() {
+        PVOID peb;
+    
+        __asm {
+            mov eax, fs:[0x30]
+            mov peb, eax
+        }
+    
+        printf("PEB Address: %p\n", peb);
+        return 0;
+    }
+\end{verbatim}
+
+\verb+fs+, resp. \verb+gs+ is a segment register used in 32-bit, resp. 64-bit, Windows to access memory. In this case, \verb+fs:[0x30]+, resp. \verb+gs:[0x60]+,  is the offset within the TEB that contains a pointer to the PEB.
+
+see~\href{https://en.wikipedia.org/wiki/Win32_Thread_Information_Block}{Win32 Thread Information Block} for more \verb+gs/fs+
+
+\subsubsection{PEB walk}
+
+\href{https://fareedfauzi.github.io/2024/07/13/PEB-Walk.html}{PEB Walk}
+
+\subsubsection{links}
+
+
+\subsection{Thread Environment Block (TEB)}
+
+PEB and its content can be accessed from the user mode. However, before accessing the PEB, we have to first access the Thread Environment Block (TEB), which serves as an information board like PEB, but for the thread this time.
+
+As the program code is running in the thread, in other words, the “inner layer”, we have to access the process’s PEB, the “outer layer,” through the TEB. Hence, we can say that TEB is a gateway to reach PEB in our case as illustrated in Figure 2.
+
+\subsection{Process and security}
+
+\verb+PROCESS_ACCESS_TOKEN+
+
+\begin{verbatim}
+    BOOL GetTokenInformation(
+        [in]            HANDLE                  TokenHandle,
+        [in]            TOKEN_INFORMATION_CLASS TokenInformationClass,
+        [out, optional] LPVOID                  TokenInformation,
+        [in]            DWORD                   TokenInformationLength,
+        [out]           PDWORD                  ReturnLength
+      );
+\end{verbatim}
+
+\href{https://learn.microsoft.com/fr-fr/windows/win32/api/winnt/ne-winnt-token_information_class}{TokenInformationClass}
+
+en gros on appel une premiere fois pour demander la taille necesaire puis on alloue le buffer et on appel une seconde fois avec le pointeur sur le buffer
+
+
+\subsection{Protected Process Light (PPL)}

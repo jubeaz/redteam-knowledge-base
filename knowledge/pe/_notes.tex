@@ -1,0 +1,56 @@
+\section{Notes}
+
+\subsection{Image Access Functions}
+
+\href{https://learn.microsoft.com/en-us/windows/win32/debug/image-access-functions}{Image Access Functions}
+
+\subsection{PE loader}
+
+The PE Loader is responsible for:
+\begin{itemize}
+    \item Loading the PE File into Memory: The loader maps the executable file into the process's virtual memory space. This involves loading the code, data, and other sections from the file into appropriate memory locations.
+    \item Resolving Dependencies: The loader resolves all dependencies, such as linked DLLs. It uses the Import Table to load and link the required libraries dynamically.
+    \item Relocation: If the executable or DLL cannot be loaded at its preferred base address (due to address space conflicts), the PE Loader adjusts addresses in the code to accommodate the new memory location.
+    \item Setting Up the Execution Environment: The loader initializes the stack, heap, and other structures necessary for the program to run. It also prepares the entry point of the program, which is where execution begins.
+    \item Initializing Global Variables: If the executable or DLL has any global constructors or initializers, the loader calls them before transferring control to the main program entry point.
+\end{itemize}
+
+How the PE Loader Works
+\begin{itemize}
+    \item 
+    \item Loading into Virtual Memory:
+    \begin{itemize}
+        \item The operating system reads the PE file from disk and loads it into the process’s virtual address space.
+        \item Memory pages are marked as executable, readable, or writable based on the section headers.
+    \end{itemize}
+    
+    
+    \item Resolving Imports and Exports:
+    \begin{itemize}
+        \item The loader scans the Import Address Table (IAT) to resolve external function calls. It ensures that all functions referenced in the executable are available in memory and updates the IAT with the actual addresses of these functions.
+        \item If a required DLL is not found, the loader will throw an error and the executable will not run.
+    \end{itemize}
+    \item Handling Relocations:
+    \begin{itemize}
+        \item If the PE file cannot be loaded at its preferred base address (as specified in the PE header), the loader applies relocations. This involves adjusting memory addresses for variables, functions, and pointers to reflect the actual load address.
+    \end{itemize}
+    
+    \item Transferring Control:
+    \begin{itemize}
+        \item Once everything is set up, the PE Loader transfers control to the program’s entry point, starting the program’s execution.
+    \end{itemize}
+\end{itemize}
+
+
+Related Concepts:
+\begin{itemize}
+    \item Dynamic Linking: The process of loading and linking libraries at runtime, which the PE Loader manages.
+    \item Address Space Layout Randomization (ASLR): A security feature that randomizes the load address of executables and libraries to make it harder for attackers to predict memory layout.
+    \item Loader Lock: A mechanism that prevents multiple threads from initializing or modifying the loader's data structures simultaneously, ensuring thread safety during the loading process.
+\end{itemize}
+
+
+\subsection{Memory aligment}
+
+Memory Mapping: When the PE Loader maps sections of the executable or DLL into memory, it uses SectionAlignment to determine where each section begins. This ensures that the sections are properly aligned in memory for efficient access and to meet architectural requirements.
+Performance and Safety: Proper alignment can improve performance and ensure that certain types of data (e.g., code) are accessed correctly by the CPU.

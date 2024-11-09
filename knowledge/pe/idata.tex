@@ -1,0 +1,103 @@
+\section{Import section (.idata)}
+\href{https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#import-directory-table}{official Microsoft documentation}
+
+section specifies which symbols (functions and data) the binary imports from shared libraries.
+
+When the loader resolves dependencies, it writes the resolved addresses into the {\bf Import Address Table (IAT)}.
+
+
+\subsection{Import Descriptor Table (.idata)}
+The Import Descriptor Table is a Data Directory located at the beginning of the \verb+.idata+ section.
+
+It consists of an array of \verb+IMAGE_IMPORT_DESCRIPTOR+ structures, each one of them is for a DLL.
+
+It doesn’t have a fixed size, so the last \verb+IMAGE_IMPORT_DESCRIPTOR+ of the array is zeroed-out (NULL-Padded) to indicate the end of the Import Directory Table.
+
+\begin{verbatim}
+typedef struct _IMAGE_IMPORT_DESCRIPTOR {
+    union {
+        DWORD   Characteristics;
+        DWORD OriginalFirstThunk;
+    } DUMMYUNIONNAME;
+    DWORD   TimeDateStamp;
+    DWORD   ForwarderChain;
+    DWORD   Name;
+    DWORD  FirstThunk;
+} IMAGE_IMPORT_DESCRIPTOR;
+typedef IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;    
+\end{verbatim}
+
+
+\begin{itemize}
+    \item \verb+OriginalFirstThunk+: RVA of the {\bf Import Lookup Table (ILT)} (an array of \verb+IMAGE_THUNK_DATA+).
+    \item \verb+FirstThunk+: RVA of the {\bf Import Address Table (IAT)} (an array of \verb+IMAGE_THUNK_DATA+)
+    \item \verb+TimeDateStamp+: A time date stamp, that’s initially set to 0 if not bound and set to -1 if bound. In case of an unbound import the time date stamp gets updated to the time date stamp of the DLL after the image is bound. In case of a bound import it stays set to -1 and the real time date stamp of the DLL can be found in the {\bf Bound Import Directory Table} in the corresponding \verb+IMAGE_BOUND_IMPORT_DESCRIPTOR+.
+    We’ll discuss bound imports in the next section.
+    \item \verb+ForwarderChain+: The index of the first forwarder chain reference. This is something responsible for DLL forwarding. (DLL forwarding is when a DLL forwards some of its exported functions to another DLL.)
+    \item \verb+Name+: An RVA of an ASCII string that contains the name of the imported DLL
+\end{itemize}
+
+
+{\bf Bound imports}: essentially means that the import table contains fixed addresses for the imported functions. These addresses are calculated and written during compile time by the linker.
+
+Using bound imports is a speed optimization, it reduces the time needed by the loader to resolve function addresses and fill the IAT, however if at run-time the bound addresses do not match the real ones then the loader will have to resolve these addresses again and fix the IAT.
+
+
+{\bf ILT versus IAT}: We need to look a little at how the loader works. When loading the program, the loader will load the DLLs and replace the name of the DLL functions in the import table
+with their address. Well, in fact, this is where it is done, the table pointed to by the \verb+Characteristics+ field contains and will always contain the name of the DLL functions while the one pointed to by \verb+FirstThunk+ will be changed by the Windows loader
+
+
+\subsection{Import Lookup Table (ILT)}
+
+The ILT is essentially a table of names or references, it tells the loader which functions are needed from the imported DLL.
+
+The ILT consists of an array of 32-bit numbers (for PE32) or 64-bit numbers for (PE32+), the last one is zeroed-out to indicate the end of the ILT.
+
+Each entry of these entries encodes information as follows:
+\begin{itemize}
+    \item Bit 31/63 (most significant bit): This is called the Ordinal/Name flag, it specifies whether to import the function by name or by ordinal.
+    \item Bits 15-0: If the Ordinal/Name flag is set to 1 these bits are used to hold the 16-bit ordinal number that will be used to import the function, bits 30-15/62-15 for PE32/PE32+ must be set to 0.
+    \item Bits 30-0: If the Ordinal/Name flag is set to 0 these bits are used to hold an RVA of a Hint/Name table.
+\end{itemize}
+
+\begin{verbatim}
+typedef struct _IMAGE_THUNK_DATA {
+    union {
+        uint32_t* Function;             // address of imported function
+        uint32_t  Ordinal;              // ordinal value of function
+        PIMAGE_IMPORT_BY_NAME AddressOfData;        // RVA of imported name
+        DWORD ForwarderStringl              // RVA to forwarder string
+    } u1;
+} IMAGE_THUNK_DATA, *PIMAGE_THUNK_DATA;
+\end{verbatim}
+
+{\bf Ordinal Import}:
+This is actually importing functions based on a number. Of course, the imported function must first call a function that is also exported ordinally! But the problem with this kind of export is that we are forced to always add the exported functions (we must always increment the export number of the function) and we cannot delete an exported function easily, otherwise we risk messing up all the rest of the numbers and the users who imported function x will actually import function x-1 for example, which is not very nice for the user of your DLL.
+
+{\bf Name Import}:
+As its name suggests, we will import the functions by their name, which is much more practical and is therefore much more widespread these days
+
+\subsection{Hint/Name Table}
+
+\begin{verbatim}
+typedef struct _IMAGE_IMPORT_BY_NAME {
+    WORD    Hint;
+    CHAR   Name[1];
+} IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;    
+\end{verbatim}
+
+\begin{itemize}
+    \item \verb+Hint+: A word that contains a number, this number is used to look-up the function, that number is first used as an index into the export name pointer table, if that initial check fails a binary search is performed on the DLL’s export name pointer table.
+    \item \verb+Name+: A null-terminated string that contains the name of the function to import.
+\end{itemize}
+
+
+
+\subsection{Import Address Table (IAT)}
+
+it initially contains pointers to the names or
+identifying numbers of the symbols to be imported. The dynamic loader then
+replaces these pointers with pointers to the actual imported functions or
+variables. A call to a library function is then implemented as a call to a thunk for
+that function, which is nothing more than an indirect jump through the IAT slot
+for the function.
