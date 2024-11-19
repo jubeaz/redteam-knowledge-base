@@ -1,0 +1,50 @@
+\section{Notes}
+
+\begin{itemize}
+    \item Windows API functions These are documented, callable subroutines in the Windows API.
+    \item Native system services (or system calls) These are the undocumented, underlying services in the OS that are callable from user mode
+    \item Kernel support functions (or routines) These are the subroutines inside the Windows OS that can be called only from kernel mode
+\end{itemize}
+
+\subsection{Virtual memory}
+
+\begin{itemize}
+    \item virtual memory is composed of 4kb pages (memory chunk)
+    \item on 32-bits:
+        \begin{itemize}
+            \item lower half of this address space (addresses \verb+0x00000000+ through \verb+0x7FFFFFFF+) to processes (2GB)
+            \item higher half of this address space (addresses \verb+0x80000000+ through \verb+0xFFFFFFFF+) to OS (2GB)
+        \end{itemize}
+\end{itemize}
+
+\subsection{Kernel mode vs. user mode}
+
+To protect user applications from accessing and/or modifying critical OS data, Windows uses two
+processor access modes:
+\begin{itemize}
+    \item user mode
+    \item kernel mode: mode of execution in a processor that grants access to all system memory and all CPU instructions
+\end{itemize}
+
+The architectures of the x86 and x64 processors define four privilege levels to protect system code and data from being overwritten by code of lesser privilege. Windows uses privilege level (ring) 0 for kernel mode and privilege level (ring) 3 for user mode.
+
+Virtual memory Pages in system space can be accessed only from kernel mode, whereas all pages in the user address space are accessible from user mode and kernel mode
+
+Windows doesn’t provide any protection for private read/write system memory being used by components running in kernel mode. 
+
+
+\subsection{Terminal Services and multiple sessions}
+The first session is considered the services session, or session zero, and contains system service hosting processes.
+
+The first login session at the physical console of the machine is session one, and additional sessions can be created through the use of the remote desktop connection program (Mstsc.exe) or through the use of fast user switching
+
+
+\subsection{Objects and handles}
+
+\begin{itemize}
+    \item a {\bf kernel object} is a single, run-time instance of a statically defined {\bf object type}
+    \item {\bf object type} comprises a system-defined data type, functions that operate on instances of the data type, and a set of object attributes.
+    \item internal structure of an object is opaque
+    \item {\bf object manager} must be called o get data out of or put data into an object
+    \item Not all data structures in the Windows OS are objects. Only data that needs to be shared, protected, named, or made visible to user-mode programs (via system services) is placed in objects
+\end{itemize}

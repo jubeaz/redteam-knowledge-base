@@ -138,6 +138,10 @@ see~\href{https://en.wikipedia.org/wiki/Win32_Thread_Information_Block}{Win32 Th
 
 \subsection{Thread Environment Block (TEB)}
 
+\begin{itemize}
+    \item \href{https://github.com/Faran-17/Windows-Internals/blob/main/Threads/1.%20Basics%20Of%20Threads.md}{Basics Of Threads}
+\end{itemize}
+
 PEB and its content can be accessed from the user mode. However, before accessing the PEB, we have to first access the Thread Environment Block (TEB), which serves as an information board like PEB, but for the thread this time.
 
 As the program code is running in the thread, in other words, the “inner layer”, we have to access the process’s PEB, the “outer layer,” through the TEB. Hence, we can say that TEB is a gateway to reach PEB in our case as illustrated in Figure 2.
@@ -162,3 +166,8 @@ en gros on appel une premiere fois pour demander la taille necesaire puis on all
 
 
 \subsection{Protected Process Light (PPL)}
+
+\begin{itemize}
+    \item \href{https://waawaa.github.io/en/Bypass-PPL-Using-Process-Explorer/}{Bypass Protected Process Light / ObRegisterCallbacks using Process Explorer }
+    \item \href{https://itm4n.github.io/lsass-runasppl/#what-are-ppl-processes}{What are PPL Processes}
+\end{itemize}
