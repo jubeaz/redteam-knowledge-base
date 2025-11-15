@@ -1,6 +1,6 @@
 | 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) |
 |-----------------------------|----------------------|
-
+# Windows Internals
 * [System architecture overview](../../knowledge/internals/archi_overview.md)
 * [Detailed system architecture](../../knowledge/internals/archi.md)
     * [Environment subsystems and subsystem DLLs](../../knowledge/internals/archi.md#environment-subsystems-and-subsystem-dlls)

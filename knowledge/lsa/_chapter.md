@@ -1,5 +1,4 @@
 | 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) |
 |-----------------------------|----------------------|
-# Minidump
-* [notes](../../knowledge/minidump/_notes.md)
-* [links](../../knowledge/minidump/_links.md)
+# LSA
+* [links](../../knowledge/lsa/_links.md)

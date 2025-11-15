@@ -1,5 +1,4 @@
-# Process {#knowledge:process}
-
+# Process
 * [notes](../../knowledge/process/_notes.md)
     * [Get IAT from process](../../knowledge/process/_notes#get-iat-from-process)
     * [Process Environment Block (PEB)](../../knowledge/process/_notes#process-environment-block-peb)

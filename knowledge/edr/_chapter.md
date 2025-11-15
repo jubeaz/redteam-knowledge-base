@@ -1,5 +1,4 @@
 | 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) |
 |-----------------------------|----------------------|
-# Minidump
-* [notes](../../knowledge/minidump/_notes.md)
-* [links](../../knowledge/minidump/_links.md)
+# EDR
+* [links](../../knowledge/edr/_links.md)

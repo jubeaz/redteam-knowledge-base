@@ -2,7 +2,7 @@
 |-----------------------------|----------------------|
 
 
-# C2: Sliver {#c2:sliver}
+# C2: Sliver
 * [Introduction](../../red_team/sliver/intro.md)
     * [Communication model](../../red_team/sliver/intro.md#communication-model)
     * [Glossary notes](../../red_team/sliver/intro.md#glossary-notes)

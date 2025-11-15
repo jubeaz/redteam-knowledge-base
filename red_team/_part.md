@@ -1,6 +1,10 @@
 | 🏠 [Home](../redteam.md)    |
 |-----------------------------|
 
+* [Phishing](../red_team/_part.md#phishing)
+* [Infrastructure](../red_team/_part.md#infrastructure)
+* [C2: Sliver](../red_team/_part.md#c2-sliver)
+
 # Phishing
 * [Introduction](../red_team/phishing/intro.md)
 * [Hash stealer](../red_team/phishing/hash_stealer.md)
