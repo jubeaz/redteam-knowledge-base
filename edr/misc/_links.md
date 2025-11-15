@@ -1,0 +1,7 @@
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
+
+
+# links
+
+-   [Evading EDR: The Definitive Guide to Defeating Endpoint Detection Systems.](https://books.google.fr/books?id=anO1EAAAQBAJ&printsec=frontcover&hl=fr#v=onepage&q&f=false)

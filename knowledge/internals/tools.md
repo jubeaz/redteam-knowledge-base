@@ -1,0 +1,28 @@
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
+
+* [Tools](../../knowledge/internals/tools.md)
+    * [NtObjectManager](../../knowledge/internals/tools#ntobjectmanager)
+
+# Tools
+
+## NtObjectManager
+
+[NtObjectManager](https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools)
+PowerShell module (backed by its supporting .NET managed library
+NtApiDotNet) is a godsend for Windows security researchers. From dealing
+with symbolic links, auditing RPC servers, playing tricks with the
+Object Manager, to just messing about with Windows, it has a myriad of
+applications. As one trying to improve their own auditing skills and
+understanding Windows internals, I am grateful for it. Right now I'll
+admit that I am just touching the surface of the capability of the
+toolset. There are some advanced use cases that I have yet to get my
+head around. This post will be a step in the right direction. Before we
+jump into how to use NtObjectManager for RPC auditing, let's take a
+short walk through the history of the RPC capabilities within
+NtApiDotNet.
+```powershell
+Get-ChildItem NtObject:\ | Sort-Object Name
+Get-ChildItem NtObject:\Dfs | Sort-Object Name
+Get-NtType
+```
