@@ -1,8 +1,30 @@
 | 🏠 [Home](../redteam.md)    |
 |-----------------------------|
 
-* Infrastructure
-* Phishing
+# Phishing
+* [Introduction](../red_team/phishing/intro.md)
+* [Hash stealer](../red_team/phishing/hash_stealer.md)
+    * [ntlm_theft](../red_team/phishing/hash_stealer.md#ntlm_theft)
+* [HTA](../red_team/phishing/hta.md)
+    * [Introduction](../red_team/phishing/hta.md#introduction)
+    * [Tools](../red_team/phishing/hta.md#tools)
+        * [Metasploit](../red_team/phishing/hta.md#metasploit)
+        * [GadgetToJScript](../red_team/phishing/hta.md#gadgettojscript)
+* [HTML Smuggling](../red_team/phishing/html_smuggling.md)
+    * [Links](../red_team/phishing/html_smuggling.md#links)
+* [Notes](../red_team/phishing/notes)
+* [Tools](../red_team/phishing/tools.md)
+    * [ntlm_theft](#ntlm_theft)
+    * [Shellter Project](#shellter-project)
+* [Links](../red_team/phishing/links.md)
+# Infrastructure
+* [HTTP(S) reverse proxy](../red_team/infra/http_reverse_proxy.md)
+    * [Nginx reverse proxy](../red_team/infra/http_reverse_proxy.md#nginx-reverse-proxy)
+    * [Apache reverse proxy](../red_team/infra/http_reverse_proxy.md#apache-reverse-proxy)
+        * [URI redirection](../red_team/infra/http_reverse_proxy.md#uri-redirection)
+        * [User Agent Redirection](../red_team/infra/http_reverse_proxy.md#user-agent-redirection)
+    * [links](../red_team/infra/http_reverse_proxy.md#links)
+* [links](../red_team/infra/links.md)
 # C2: Sliver
 * [Introduction](../red_team/sliver/intro.md)
     * [Communication model](../red_team/sliver/intro.md#communication-model)
@@ -60,39 +82,4 @@
     * [Cyb3rDudu SliverLoader](../red_team/sliver/notes.md#cyb3rdudu-sliverloader)
 * [Links](../red_team/sliver/links.md)
 
-* Notes
 
-
-
-
-------------------------------------------------------------------------------
--   [Red Team](#red-team){#toc-red-team}
-
-# Red Team
-* Notes
-* Infrastructure
-* Phishing
-* C2: Sliver {#c2:sliver}
-
-
-## Notes
-* [prolab Infra](../red_team/notes/prolab)
-## Infrastructure
-* [links](../red_team/infra/links)
-## Phishing
-* [Introduction](../red_team/phishing/intro)
-* [Hash stealer](../red_team/phishing/hash_stealer)
-* [HTA](../red_team/phishing/hta)
-* [HTML Smuggling](../red_team/phishing/html_smuggling)
-* [Notes](../red_team/phishing/notes)
-* [Links](../red_team/phishing/links)
-## C2: Sliver {#c2:sliver}
-* [Introduction](../red_team/sliver/intro)
-* [Install and maintenance](../red_team/sliver/install)
-* [Listeners](../red_team/sliver/listeners)
-* [Implants](../red_team/sliver/implants)
-* [Port forwarding, Pivots and Socks](../red_team/sliver/pivots)
-* [Commands and Tools](../red_team/sliver/commands_tools)
-* [Usefull Extensions](../red_team/sliver/extensions)
-* [Notes](../red_team/sliver/notes)
-* [Links](../red_team/sliver/links)

@@ -1,8 +1,8 @@
 | 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
 |--------------------------------|----------------------|-------------------------|
 
--   [Hash stealer](#hash-stealer){#toc-hash-stealer}
-    -   [ntlm_theft](#ntlm_theft){#toc-ntlm_theft}
+* [Hash stealer](../../red_team/phishing/hash_stealer.md)
+    * [ntlm_theft](../../red_team/phishing/hash_stealer.md#ntlm_theft)
 
 # Hash stealer
 

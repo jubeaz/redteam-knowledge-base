@@ -1,11 +1,11 @@
 | 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
 |--------------------------------|----------------------|-------------------------|
 
--   [HTA](#hta){#toc-hta}
-    -   [Introduction](#introduction){#toc-introduction}
-    -   [Tools](#tools){#toc-tools}
-        -   [Metasploit](#metasploit){#toc-metasploit}
-        -   [GadgetToJScript](#gadgettojscript){#toc-gadgettojscript}
+* [HTA](../../red_team/phishing/hta.md)
+    * [Introduction](../../red_team/phishing/hta.md#introduction)
+    * [Tools](../../red_team/phishing/hta.md#tools)
+        * [Metasploit](../../red_team/phishing/hta.md#metasploit)
+        * [GadgetToJScript](../../red_team/phishing/hta.md#gadgettojscript)
 
 # HTA
 

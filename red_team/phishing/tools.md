@@ -1,9 +1,9 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Tools](#tools){#toc-tools}
-    -   [ntlm_theft](#ntlm_theft){#toc-ntlm_theft}
-    -   [Shellter Project](#shellter-project){#toc-shellter-project}
+* [Tools](../../red_team/phishing/tools.md)
+    * [ntlm_theft](#ntlm_theft)
+    * [Shellter Project](#shellter-project)
 
 # Tools
 

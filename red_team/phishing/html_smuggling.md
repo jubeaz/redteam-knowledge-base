@@ -1,8 +1,8 @@
 | 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
 |--------------------------------|----------------------|-------------------------|
 
--   [HTML Smuggling](#html-smuggling){#toc-html-smuggling}
-    -   [Links](#links){#toc-links}
+* [HTML Smuggling](../../red_team/phishing/html_smuggling.md)
+    * [Links](../../red_team/phishing/html_smuggling.md#links)
 
 # HTML Smuggling
 
@@ -57,8 +57,8 @@ then generate a payload base64 encoded and place it in the `var file`
 
 ## Links
 
--   [HTML Smuggling
+* [HTML Smuggling
     explained](https://www.outflank.nl/blog/2018/08/14/html-smuggling-explained/)
 
--   [HTML smuggling: A Stealthier Approach to Deliver
+* [HTML smuggling: A Stealthier Approach to Deliver
     Malware](https://www.cyfirma.com/research/html-smuggling-a-stealthier-approach-to-deliver-malware/)

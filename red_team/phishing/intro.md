@@ -1,10 +1,7 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
-
--   [Introduction](#introduction){#toc-introduction}
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
 # Introduction
 
--   hash stealer:
-
--   Arbitrary File Execution
+* hash stealer:
+* Arbitrary File Execution
