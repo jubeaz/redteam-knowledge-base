@@ -1,15 +1,8 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Port forwarding, Pivots and Socks](#port-forwarding-pivots-and-socks){#toc-port-forwarding-pivots-and-socks}
-    -   [Introduction](#introduction){#toc-introduction}
-        -   [Chisel pivoting](#chisel-pivoting){#toc-chisel-pivoting}
-    -   [SOCKS5 / WireGuard SOCKS5](#socks5-wireguard-socks5){#toc-socks5-wireguard-socks5}
-    -   [Port forwarding and Reverse Port forwarding (to finish)](#port-forwarding-and-reverse-port-forwarding-to-finish){#toc-port-forwarding-and-reverse-port-forwarding-to-finish}
-    -   [Pivot (to finish)](#pivot-to-finish){#toc-pivot-to-finish}
-        -   [General commands on pivots](#general-commands-on-pivots){#toc-general-commands-on-pivots}
-        -   [TCP pivots](#tcp-pivots){#toc-tcp-pivots}
-    -   [Named Pipe Pivots (SMB)](#named-pipe-pivots-smb){#toc-named-pipe-pivots-smb}
+
+
 
 # Port forwarding, Pivots and Socks
 
@@ -37,7 +30,7 @@ respectively stopping the tasks.
     make windowsdll_64
     make windowsdll_32
 
-## SOCKS5 / WireGuard SOCKS5
+## SOCKS5 and WireGuard SOCKS5
 
 In the implant executing `socks5 start -P <socks_port>` will be equals
 to an `ssh -D <socks_port>` to the target hosting the implant.

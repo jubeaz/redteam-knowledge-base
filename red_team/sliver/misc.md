@@ -1,5 +1,13 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
+
+
+* [Introduction](../../red_team/sliver/intro.md)
+    * [Communication model](../../red_team/sliver/intro.md#communication-model)
+
+
+
+    
 
 -   [misc](#misc){#toc-misc}
     -   [Persistence](#persistence){#toc-persistence}

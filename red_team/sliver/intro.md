@@ -1,13 +1,16 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Introduction](#introduction){#toc-introduction}
-    -   [Glossary notes](#glossary-notes){#toc-glossary-notes}
+
+* [Introduction](../../red_team/sliver/intro.md)
+    * [Communication model](../../red_team/sliver/intro.md#communication-model)
+    * [Glossary notes](../../red_team/sliver/intro.md#glossary-notes)
 
 # Introduction
 
 [sliver wiki](https://sliver.sh/)
 
+## Communication model
 ![Sliver communication model](images/communication_model.png){#fig:sliver:communication_model width="\\linewidth"}
 
 ## Glossary notes

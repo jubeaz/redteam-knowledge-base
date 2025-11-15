@@ -1,10 +1,11 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Usefull Extensions](#usefull-extensions){#toc-usefull-extensions}
-    -   [charpsh](#charpsh){#toc-charpsh}
-    -   [inline-execute-assembly](#inline-execute-assembly){#toc-inline-execute-assembly}
-    -   [Kerberos tools](#kerberos-tools){#toc-kerberos-tools}
+
+* [Usefull Extensions](../../red_team/sliver/extensions.md)
+    * [charpsh](../../red_team/sliver/extensions.md#charpsh)
+    * [inline-execute-assembly](../../red_team/sliver/extensions.md#inline-execute-assembly)
+    * [Kerberos tools](../../red_team/sliver/extensions.md#kerberos-tools)
 
 # Usefull Extensions
 

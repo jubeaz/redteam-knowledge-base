@@ -1,11 +1,10 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Notes](#notes){#toc-notes}
-    -   [Sliver prep](#sliver-prep){#toc-sliver-prep}
-    -   [My SliverLoader](#my-sliverloader){#toc-my-sliverloader}
-    -   [Cyb3rDudu
-        SliverLoader](#cyb3rdudu-sliverloader){#toc-cyb3rdudu-sliverloader}
+* [Notes](../../red_team/sliver/notes.md)
+    * [Sliver prep](../../red_team/sliver/notes.md#sliver-prep)
+    * [My SliverLoader](../../red_team/sliver/notes.md#my-sliverloader)
+    * [Cyb3rDudu SliverLoader](../../red_team/sliver/notes.md#cyb3rdudu-sliverloader)
 
 # Notes
 

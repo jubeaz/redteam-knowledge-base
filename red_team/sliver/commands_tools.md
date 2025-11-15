@@ -1,49 +1,45 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
-
--   [Basic Commands](#basic-commands){#toc-basic-commands}
-    -   [File transfert](#file-transfert){#toc-file-transfert}
-    -   [execute](#execute){#toc-execute}
-    -   [execute-assembly](#execute-assembly){#toc-execute-assembly}
-    -   [execute-assembly in-process](#execute-assembly-in-process){#toc-execute-assembly-in-process}
--   [Aliases and Extension(Armory)](#aliases-and-extensions-armory){#toc-aliases-and-extensions-armory}
-    -   [Armory Mgt](#armory-mgt){#toc-armory-mgt}
-    -   [Execution](#execution){#toc-execution}
-    -   [Alias](#alias){#toc-alias}
--   [Donut](#donut){#toc-donut}
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
 
-# Basic Commands
+* [Commands and Tools](../../red_team/sliver/commands_tools.md)
+    * [Commands](../../red_team/sliver/commands_tools.md#commands)
+        * [Basic Commands](../../red_team/sliver/commands_tools.md#basic-commands)
+        * [File transfert](../../red_team/sliver/commands_tools.md#file-transfert)
+        * [execute](../../red_team/sliver/commands_tools.md#execute)
+        * [execute-assembly](../../red_team/sliver/commands_tools.md#execute-assembly)
+        * [execute-assembly in-process](../../red_team/sliver/commands_tools.md#execute-assembly-in-process)
+    * [Aliases and Extension(Armory)](../../red_team/sliver/commands_tools.md#aliases-and-extensions-armory)
+        * [Armory Mgt](../../red_team/sliver/commands_tools.md#armory-mgt)
+        * [Execution](../../red_team/sliver/commands_tools.md#execution)
+        * [Alias](../../red_team/sliver/commands_tools.md#alias)
+        * [Writing Aliases](../../red_team/sliver/commands_tools.md#writing-aliases)
+    * [Donut](#donut)
+
+# Commands and Tools
+## Commands
+### Basic Commands
 
 Common options:
 
 -   `-t <sec>`: timeout
-
 -   `--in-process`
-
 -   `--amsi-bypass`
-
 -   `--etw-bypass`
-
 -   `--save`: save ouput to disk
-
-
 -   `shell`: start an interactive shell
-
 -   `getsystem`: create a new beacon with `NT AUTHORITY\SYSTEM`
-
 -   `make-token`: create a token based on credentials
-
 -   `impersonate`: Impersonate a logged in user
 
-## File transfert
+### File transfert
 
 for `download` and `upload` commands, when specifying a Windows
 directory, we need to escape the backslash character.
 
     upload pwn.exe C:\\temp\\pwn.exe
 
-## execute
+### execute
 
 Execute a program on the remote system. Note that we must be cautious
 running the execute command as it will open a command prompt or the
@@ -55,7 +51,7 @@ tool's GUI.
 
 
 
-## execute-assembly
+### execute-assembly
 
 `execute-assembly` allows us to run .NET binaries on the target machine,
 without uploading them. However, one caveat that `execute-assembly` has
@@ -85,13 +81,13 @@ The key takeaways that we get from those basic examples are:
 -   Certain API calls can appear as unusual for the process that you are
     injecting into.
 
-## execute-assembly in-process
+### execute-assembly in-process
 
 Avoid to create a child process and allow access to bypasses (AMSI, ETW)
 
     execute-assembly --in-process --amsi-bypass --etw-bypass <local_path_to_file> <params>
 
-# Aliases and Extensions (Armory)
+## Aliases and Extensions (Armory)
 
 Sliver allows an operator to extend the local client console and its
 features by adding new commands based on third party tools. The easiest
@@ -123,7 +119,7 @@ them in-process, using the `--in-process` flag, or a custom BOF
 extension like `inline-execute-assembly`. There is currently no
 workaround for non-reflective PE extension.
 
-## Armory Mgt
+### Armory Mgt
     armory
     armory install <soft>
     armory update
@@ -147,11 +143,11 @@ workaround for non-reflective PE extension.
     # install extensions
     extensions install
 
-## Execution
+### Execution
 ```bash
 <name> -- <params>
 ```
-## Alias
+### Alias
 
 A Sliver alias is nothing more than a folder inside
 `~/.sliver-client/extensions/` or  `/.sliver-client/aliases/` with the
@@ -166,7 +162,7 @@ To load an alias in Sliver, use the `alias load` command:
 
     alias load /home/lesnuages/tools/misc/sliver-extensions/GhostPack/Rubeus
 
-## Writing Aliases
+### Writing Aliases
 
 make a folder somewhere with the binary and the `alias.json`
 
@@ -203,10 +199,7 @@ then run `aliases install <folder_absolut_path>`
 
 restart or load `aliases load /home/jubeaz/.sliver-client/aliases/winpeas/alias.json`
 
-## 
-
-
-# Donut
+## Donut
 
 [Donut](https://github.com/TheWover/donut) is a tool focused on creating
 binary shellcodes that can be executed in memory; Donut will generate a

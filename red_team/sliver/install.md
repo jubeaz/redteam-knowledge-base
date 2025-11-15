@@ -1,12 +1,13 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Install, maintenance and config](#install-and-maintenance){#toc-install-and-maintenance}
-    -   [System wide install](#system-wide-install){#toc-system-wide-install}
-    -   [Per user install](#per-user-install){#toc-per-user-install}
-        -   [Server](#server){#toc-server}
-        -   [client](#client){#toc-client}
-    - [Config](#config)
+
+* [Install, maintenance and config](../../red_team/sliver/install.md)
+    * [System wide install](../../red_team/sliver/install.md#system-wide-install)
+    * [Per user install](../../red_team/sliver/install.md#per-user-install)
+        * [Server](../../red_team/sliver/install.md#server)
+        * [client](../../red_team/sliver/install.md#client)
+    * [Config](../../red_team/sliver/install.md#config)
 
 # Install and maintenance
 

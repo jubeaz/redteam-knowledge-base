@@ -1,10 +1,11 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Listeners](#listeners){#toc-listeners}
-    -   [Standard listeners](#standard-listeners){#toc-standard-listeners}
-    -   [stagging listener](#stagging-listener){#toc-stagging-listener}
-    -   [websites](#websites){#toc-websites}
+
+* [Listeners](../../red_team/sliver/listeners.md)
+    * [Standard listeners](../../red_team/sliver/listeners.md#standard-listeners)
+    * [stagging listener](../../red_team/sliver/listeners.md#stagging-listener)
+    * [websites](../../red_team/sliver/listeners.md#websites)
 
 # Listeners
 

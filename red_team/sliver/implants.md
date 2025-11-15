@@ -1,14 +1,18 @@
-| 🏠 [Home](../../pentesting.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
-|--------------------------------|----------------------|-------------------------|
+| 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
+|-----------------------------|----------------------|-------------------------|
 
--   [Implants](#implants){#toc-implants}
-    -   [Introduction](#introduction){#toc-introduction}
-    -   [Beacon](#beacon){#toc-beacon}
-    -   [Session](#session){#toc-session}
-    -   [Named pipes](#named-pipes){#toc-named-pipes}
-    -   [Profiles](#profiles){#toc-profiles}
-    -   [Staging](#staging){#toc-staging}
-    -   [Notes](#notes){#toc-notes}
+
+* [Implants](../../red_team/sliver/implants.md)
+    * [Introduction](../../red_team/sliver/implants.md#introduction)
+        * [Binaries location](../../red_team/sliver/implants.md#binaries-location)
+        * [Multi domains](../../red_team/sliver/implants.md#multi-domains)
+        * [Proxy and Advanced Options](../../red_team/sliver/implants.md#proxy-and-advanced-options)
+    * [Beacon](../../red_team/sliver/implants.md#beacon)
+    * [Session](../../red_team/sliver/implants.md#session)
+    * [Named pipes](../../red_team/sliver/implants.md#named-pipes)
+    * [Profiles](../../red_team/sliver/implants.md#profiles)
+    * [Staging](../../red_team/sliver/implants.md#staging)
+    * [Notes](../../red_team/sliver/implants.md#notes)
 
 # Implants
 
@@ -34,13 +38,13 @@ implants format are:
 
 -   `shellcode`:
 
-## binaries location
+### Binaries location
 shellcode is located in `/root/.sliver/slivers/windows/amd64`
 
-## multi domains
+### Multi domains
 * [multi-domains](https://sliver.sh/docs?name=HTTPS%20C2#multiple-domains)
 
-## proxy and Advanced Options
+### Proxy and Advanced Options
 
 [Advanced options](https://sliver.sh/docs?name=C2+Advanced+Options) are configured per-C2 endpoint and are passed as URL encoded parameters to the C2 URL in the generate command. For example:
 ```bash
