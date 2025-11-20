@@ -59,6 +59,11 @@ We use the `--prepend-size` since we are going to be using the
 Metasploit/msfvenom stager, but if you write your own custom one, you
 shouldn't include that flag.
 
+## Stagers
+
+* [Writing a Sliver C2 Powershell Stager with Shellcode Compression and AES Encryption](https://medium.com/@youcef.s.kelouaz/writing-a-sliver-c2-powershell-stager-with-shellcode-compression-and-aes-encryption-9725c0201ea8)
+* [Learning Sliver C2 (06) - Stagers: Basics](https://dominicbreuker.com/post/learning_sliver_c2_06_stagers/)
+
 ## websites
 
 Sliver can stand up a website on your HTTP(S) listener in order to make

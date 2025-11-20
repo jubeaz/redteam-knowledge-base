@@ -1,22 +1,14 @@
 | 🏠 [Home](../../redteam.md) | ⬅️ ⬅️ [Part](../_part) | ⬅️ [Chapter](./_chapter) |
 |-----------------------------|----------------------|-------------------------|
 
-
-* [Introduction](../../red_team/sliver/intro.md)
-    * [Communication model](../../red_team/sliver/intro.md#communication-model)
-
-
-
-    
-
--   [misc](#misc){#toc-misc}
-    -   [Persistence](#persistence){#toc-persistence}
-        -   [Sliver Backdoor](#sliver-backdoor){#toc-sliver-backdoor}
-        -   [Other solutions](#other-solutions){#toc-other-solutions}
-    -   [Lateral Movement](#lateral-movement){#toc-lateral-movement}
-    -   [Anti-virus Evasion](#anti-virus-evasion){#toc-anti-virus-evasion}
-    -   [Loot](#loot){#toc-loot}
-
+* [misc](../../red_team/sliver/misc.md)
+    * [Persistence](../../red_team/sliver/misc.md#persistence)
+        * [Sliver Backdoor](../../red_team/sliver/misc.md#sliver-backdoor)
+        * [Other solutions](../../red_team/sliver/misc.md#other-solutions)
+    * [Lateral Movement](../../red_team/sliver/misc.md#lateral-movement)
+    * [Anti-virus Evasion](../../red_team/sliver/misc.md#anti-virus-evasion)
+    * [Loot](../../red_team/sliver/misc.md#loot)
+    * [Automation](../../red_team/sliver/misc.md#automation)
 # misc
 
 ## Persistence
@@ -83,4 +75,8 @@ alternative solution :
 
 ## Loot
 
-[\[](https://sliver.sh/docs?name=Loot)Loot\]
+* [Loot](https://sliver.sh/docs?name=Loot)
+
+## Automation
+
+* [sliver-py](https://github.com/moloch--/sliver-py)

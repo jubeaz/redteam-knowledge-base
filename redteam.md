@@ -13,7 +13,7 @@
     * [Phishing](red_team/_part.md#phishing)
     * [Infrastructure](red_team/_part.md#infrastructure)
     * [C2: Sliver](red_team/_part.md#c2-sliver)
-
+    * [Links](red_team/_part.md#links)
 * [LSA](lsa/_part.md)
 * [EDR / AV](edr/_part.md)
 * malware

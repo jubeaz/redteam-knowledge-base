@@ -2,11 +2,35 @@
 |-----------------------------|----------------------|-------------------------|
 
 * [Notes](../../red_team/sliver/notes.md)
+    * [private armory](../../red_team/sliver/notes.md#private-armory)
     * [Sliver prep](../../red_team/sliver/notes.md#sliver-prep)
     * [My SliverLoader](../../red_team/sliver/notes.md#my-sliverloader)
     * [Cyb3rDudu SliverLoader](../../red_team/sliver/notes.md#cyb3rdudu-sliverloader)
 
 # Notes
+## Private armory
+a priori pas encore dispo en 1.5.44
+il manque le flag --armory
+
+`sliver/client/command/armory/install.go`
+```go
+func ArmoryInstallCmd(cmd *cobra.Command, con *console.SliverClient, args []string) {
+...SNIP...
+	armoryName, err := cmd.Flags().GetString("armory")
+	if err != nil {
+		con.PrintErrorf("Could not parse %q flag: %s\n", "armory", err)
+		return
+	}
+```
+
+`sliver/client/command/armory/parsers.go`
+
+`sliver/Makefile`
+```
+ARMORY_REPO_URL ?= https://api.github.com/repos/sliverarmory/armory/releases
+```
+
+sliver/client/assets/armories.go
 
 ## Sliver prep
 

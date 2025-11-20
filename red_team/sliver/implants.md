@@ -82,6 +82,7 @@ info
 ```bash
 generate --http <server_ip>:<port> --skip-symbols -N <beacon_name> --os windows 
 generate --mtls <server_ip>:<port> --skip-symbols -N <beacon_name> --os windows
+```
 
 to stop using a session:
 ```bash
