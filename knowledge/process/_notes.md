@@ -41,19 +41,19 @@
 developers](https://metehan-bulut.medium.com/understanding-the-process-environment-block-peb-for-malware-analysis-26315453793f),
 along with brief descriptions of each:
 
--   
+* 
 
--   `0x002` `BeingDebugged`, Anti-Debug
+* `0x002` `BeingDebugged`, Anti-Debug
 
--   `0x068` `NtGlobalFlag`, Anti-Debug
+* `0x068` `NtGlobalFlag`, Anti-Debug
 
--   `0x018` `ProcessHeap`, Anti-Debug
+* `0x018` `ProcessHeap`, Anti-Debug
 
--   `0x00c` `Ldr`, API Hashing
+* `0x00c` `Ldr`, API Hashing
 
--   `0x008` `ImageBaseAddress`, Process Hollowing
+* `0x008` `ImageBaseAddress`, Process Hollowing
 
--   `0x010` `ProcessParameters`, UAC Bypass
+* `0x010` `ProcessParameters`, UAC Bypass
 
 <!-- -->
 
@@ -88,21 +88,21 @@ including the doubly-linked list `InMemoryOrderModuleList`
         LIST_ENTRY              InInitializationOrderModuleList;
     } PEB_LDR_DATA, *PPEB_LDR_DATA;
 
--   `Lenght`: Size of structure, used by ntdll.dll as structure version
+* `Lenght`: Size of structure, used by ntdll.dll as structure version
     ID.
 
--   `Initialized` If set, loader data section for current process is
+* `Initialized` If set, loader data section for current process is
     initialized.
 
--   `SsHandle`: unknown
+* `SsHandle`: unknown
 
--   `InLoadOrderModuleList`: doubly linked list containing pointers to
+* `InLoadOrderModuleList`: doubly linked list containing pointers to
     `LDR_MODULE` structure for previous and next module in load order
 
--   `InMemoryOrderModuleList`: same as `InLoadOrderModuleList` but in
+* `InMemoryOrderModuleList`: same as `InLoadOrderModuleList` but in
     memory placement order
 
--   `InInitializationOrderModuleList`: same as `InLoadOrderModuleList`
+* `InInitializationOrderModuleList`: same as `InLoadOrderModuleList`
     but in memory initialization order
 
 `InMemoryOrderModuleList` a doubly linked list containing pointers to
@@ -169,7 +169,7 @@ more `gs/fs`
 
 ## Thread Environment Block (TEB)
 
--   [Basics Of Threads](https://github.com/Faran-17/Windows-Internals/blob/main/Threads/1.%20Basics%20Of%20Threads.md)
+* [Basics Of Threads](https://github.com/Faran-17/Windows-Internals/blob/main/Threads/1.%20Basics%20Of%20Threads.md)
 
 PEB and its content can be accessed from the user mode. However, before
 accessing the PEB, we have to first access the Thread Environment Block
@@ -201,9 +201,9 @@ sur le buffer
 
 ## Protected Process Light (PPL)
 
--   [Bypass Protected Process Light / ObRegisterCallbacks using Process
-    Explorer
-    ](https://waawaa.github.io/en/Bypass-PPL-Using-Process-Explorer/)
-
--   [What are PPL
-    Processes](https://itm4n.github.io/lsass-runasppl/#what-are-ppl-processes)
+* [Do You Really Know About LSA Protection RunAsPPL)?](https://itm4n.github.io/lsass-runasppl/)
+* [Background on Windows Protected Processes](https://googleprojectzero.blogspot.com/2018/10/injecting-code-into-windows-protected.html)
+* [Quick introduction to Protected Processes and Protected Process Light for red team professionals](https://www.100daysofredteam.com/p/quick-introduction-to-protected-processes-protected-process-light-red-team)
+* [Bypass Protected Process Light / ObRegisterCallbacks using Process Explorer](https://waawaa.github.io/en/Bypass-PPL-Using-Process-Explorer/)
+* [What are PPL Processes](https://itm4n.github.io/lsass-runasppl/#what-are-ppl-processes)
+* [Protected Processes Part 3: Windows PKI Internals (Signing Levels, Scenarios, Signers, Root Keys, EKUs & Runtime Signers)](https://www.crowdstrike.com/en-us/blog/protected-processes-part-3-windows-pki-internals-signing-levels-scenarios-signers-root-keys/)

@@ -107,3 +107,7 @@
 * [links](../knowledge/lsa/_links.md)
 # EDR
 * [links](../knowledge/edr/_links.md)
+
+# Distributed Component Object Model (DCOM)
+* [notes](../knowledge/dcom/_notes.md)
+* [links](../knowledge/dcom/_links.md)

@@ -21,14 +21,15 @@ MrAle98](https://github.com/sliverarmory/armory/issues/35) that contains
 a forked version of the tool that can be used. It integrates a few
 additions, such as listing the currently running tasks of chisel and
 respectively stopping the tasks.
-
-    sudo apt install mingw-w64
-    git clone https://github.com/MrAle98/chisel
-    cd chisel/
-    mkdir ~/.sliver-client/extensions/chisel
-    cp extension.json ~/.sliver-client/extensions/chisel
-    make windowsdll_64
-    make windowsdll_32
+```bash
+sudo apt install mingw-w64
+git clone https://github.com/MrAle98/chisel
+cd chisel/
+mkdir ~/.sliver-client/extensions/chisel
+cp extension.json ~/.sliver-client/extensions/chisel
+make windowsdll_64
+make windowsdll_32
+```
 
 ## SOCKS5 and WireGuard SOCKS5
 
@@ -38,8 +39,7 @@ to an `ssh -D <socks_port>` to the target hosting the implant.
 SOCKS proxy feature can only be used on sessions (i.e., interactive
 sessions) and not beacons.
 
-for WireGuard SOCKS5 see [Reverse
-SOCKS](https://sliver.sh/docs?name=Reverse+SOCKS)
+for WireGuard SOCKS5 see [Reverse SOCKS](https://sliver.sh/docs?name=Reverse+SOCKS)
 
 ## Port forwarding and Reverse Port forwarding (to finish)
 

