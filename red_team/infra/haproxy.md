@@ -79,6 +79,10 @@ backend penelope_backend
     mode tcp
     timeout tunnel 12h
     server penelope 127.0.0.1:4444
+backend msf_backend
+    mode tcp
+    timeout tunnel 12h
+    server penelope 127.0.0.1:4445
 backend backend_tcp_reject
     mode tcp
 ```
