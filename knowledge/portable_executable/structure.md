@@ -3,20 +3,20 @@
 
 
 
-* [Structure](../../knowledge/pe/structure.md)
-    * [General concepts](../../knowledge/pe/structure.md#general-concepts)
-        * [Relative Virtual Address (RVA)](../../knowledge/pe/structure.md#relative-virtual-address-rva)
-    * [Introduction](../../knowledge/pe/structure.md#introduction)
-    * [DOS](../../knowledge/pe/structure.md#dos)
-        * [DOS Header](../../knowledge/pe/structure.md#dos-header)
-        * [DOS stub (Image Only)](../../knowledge/pe/structure.md#dos-stub-image-only)
-    * [Rich Header](../../knowledge/pe/structure.md#rich-header)
-    * [NT Headers](../../knowledge/pe/structure.md#nt-headers)
-        * [(COFF) File Header](../../knowledge/pe/structure.md#coff-file-header)
-        * [Optional Header](../../knowledge/pe/structure.md#optional-header)
-        * [Data Directories](../../knowledge/pe/structure.md#data-directories)
-    * [Section Table (Section Headers)](../../knowledge/pe/structure.md#section-table-section-headers)
-    * [sections](../../knowledge/pe/structure.md#sections)
+* [Structure](../../knowledge/portable_executable/structure.md)
+    * [General concepts](../../knowledge/portable_executable/structure.md#general-concepts)
+        * [Relative Virtual Address (RVA)](../../knowledge/portable_executable/structure.md#relative-virtual-address-rva)
+    * [Introduction](../../knowledge/portable_executable/structure.md#introduction)
+    * [DOS](../../knowledge/portable_executable/structure.md#dos)
+        * [DOS Header](../../knowledge/portable_executable/structure.md#dos-header)
+        * [DOS stub (Image Only)](../../knowledge/portable_executable/structure.md#dos-stub-image-only)
+    * [Rich Header](../../knowledge/portable_executable/structure.md#rich-header)
+    * [NT Headers](../../knowledge/portable_executable/structure.md#nt-headers)
+        * [(COFF) File Header](../../knowledge/portable_executable/structure.md#coff-file-header)
+        * [Optional Header](../../knowledge/portable_executable/structure.md#optional-header)
+        * [Data Directories](../../knowledge/portable_executable/structure.md#data-directories)
+    * [Section Table (Section Headers)](../../knowledge/portable_executable/structure.md#section-table-section-headers)
+    * [sections](../../knowledge/portable_executable/structure.md#sections)
 
 # Structure
 

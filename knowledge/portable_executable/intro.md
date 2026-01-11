@@ -3,8 +3,8 @@
 
 
 
-* [Notes](../../knowledge/pe/_notes.md)
-    * [Notes](../../knowledge/pe/_notes.md#Notes)
+* [Notes](../../knowledge/portable_executable/_notes.md)
+    * [Notes](../../knowledge/portable_executable/_notes.md#Notes)
 
 # Introduction
 

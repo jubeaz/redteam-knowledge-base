@@ -2,11 +2,11 @@
 |-----------------------------|----------------------|-------------------------|
 
 
-* [Import section (.idata)](../../knowledge/pe/import.md)
-    * [Import Descriptor Table](../../knowledge/pe/import.md#import-descriptor-table)
-    * [Import Lookup Table (ILT)](../../knowledge/pe/import.md#import-lookup-table-ilt)
-    * [Hint/Name Table](../../knowledge/pe/import.md#hintname-table)
-    * [Import Address Table (IAT)](../../knowledge/pe/import.md#import-address-table-iat)
+* [Import section (.idata)](../../knowledge/portable_executable/import.md)
+    * [Import Descriptor Table](../../knowledge/portable_executable/import.md#import-descriptor-table)
+    * [Import Lookup Table (ILT)](../../knowledge/portable_executable/import.md#import-lookup-table-ilt)
+    * [Hint/Name Table](../../knowledge/portable_executable/import.md#hintname-table)
+    * [Import Address Table (IAT)](../../knowledge/portable_executable/import.md#import-address-table-iat)
 
 
 

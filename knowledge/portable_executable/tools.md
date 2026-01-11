@@ -3,9 +3,9 @@
 
 
 
-* [Tools](../../knowledge/pe/tools.md)
-    * [PE parser library](../../knowledge/pe/tools.md#pe-parser-library)
-    * [PE-bear](../../knowledge/pe/tools.md#pe-bear)
+* [Tools](../../knowledge/portable_executable/tools.md)
+    * [PE parser library](../../knowledge/portable_executable/tools.md#pe-parser-library)
+    * [PE-bear](../../knowledge/portable_executable/tools.md#pe-bear)
 
 # Tools
 

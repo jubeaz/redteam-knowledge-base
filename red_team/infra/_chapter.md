@@ -9,5 +9,7 @@
         * [URI redirection](../../red_team/infra/http_reverse_proxy.md#uri-redirection)
         * [User Agent Redirection](../../red_team/infra/http_reverse_proxy.md#user-agent-redirection)
     * [links](../../red_team/infra/http_reverse_proxy.md#links)
-* [misc](../../red_team/infra/misc.md)
+* [Misc](../../red_team/infra/misc.md)
+    * [Share tun0 on LAN](../../red_team/infra/misc.md#share-tun0-on-lan)
+    * [Metasploit through haproxy](../../red_team/infra/misc.md#metasploit-through-haproxy)
 * [links](../../red_team/infra/links.md)

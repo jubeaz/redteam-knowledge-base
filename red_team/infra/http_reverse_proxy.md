@@ -28,43 +28,67 @@
         `uploadserver -b 127.0.0.1 8884 --directory $(pwd)/utils`
 ## Nginx reverse proxy
 better solution for box because allow multiple directory to be mapped on the same site (did not check how to do it on apache) 
+
+**Note**: **sliver listener does not like TLS Termination (need to confirm)** so in case of reverse proxy use a reverse proxy must always run on the sliver server host to proxy to http listener to ensure end-to-end tls encryption. 
+ 
+### `/etc/nginx/nginx.conf`
 ```bash
-$ cat /etc/nginx/nginx.conf
 user http;
 worker_processes  1;
+
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
+
 #pid        logs/nginx.pid;
+
+
 # Load all installed modules
 include modules.d/*.conf;
+
+
 events {
     worker_connections  1024;
 }
+
 http {
     include       mime.types;
     default_type  application/octet-stream;
+    log_format with_port '[$server_port] $remote_addr - $remote_user '
+                     '[$time_local] "$request" '
+                     '$status $body_bytes_sent '
+                     '"$http_referer" '
+                     '"$http_user_agent"';
+
     #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
     #                  '$status $body_bytes_sent "$http_referer" '
     #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
     #access_log  logs/access.log  main;
+
     sendfile        on;
     #tcp_nopush     on;
+
     #keepalive_timeout  0;
     keepalive_timeout  65;
+
     #gzip  on;
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        ''      close;
+    }
    #include /etc/nginx/conf.d/*.conf;
    include /etc/nginx/conf.d/http.conf;
+   include /etc/nginx/conf.d/https.conf;
 }
 ```
 
+### `/etc/nginx/conf.d/http.conf`
 ```bash
-$ cat /etc/nginx/conf.d/http.conf
-
 server {
     listen       8880;
     server_name  localhost;
-
+    access_log /var/log/nginx/access.log with_port;
     #access_log  logs/host.access.log  main;
     #error_page  404              /404.html;
     # redirect server error pages to the static page /50x.html
@@ -131,12 +155,12 @@ server {
 }
 ```
 
+### `/etc/nginx/conf.d/https.conf`
 ```bash
-$ cat /etc/nginx/conf.d/https.conf
-
 server {
     listen       443 ssl;
 #        server_name  localhost;
+    access_log /var/log/nginx/access.log with_port;
 
     ssl_certificate      /etc/nginx/ssl/redteam.crt;
     ssl_certificate_key  /etc/nginx/ssl/redteam.key;
@@ -216,14 +240,23 @@ server {
         proxy_pass  http://127.0.0.1:8873/;
     }
 
-#    location /ligolo {
-#            proxy_set_header Host $host;
-#            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#            proxy_set_header Upgrade websocket;
-#            proxy_set_header Connection Upgrade;
-#            proxy_http_version 1.1;
-#            proxy_pass https://127.0.0.1:11602;
-#    }
+    # proxy  -selfcert -laddr https://127.0.0.1:11602 -v
+    location /ligolo/ {
+        proxy_pass https://127.0.0.1:11602;
+        proxy_http_version 1.1;
+	    proxy_set_header Upgrade websocket;
+        #proxy_set_header Upgrade $http_upgrade;
+	    proxy_set_header Connection Upgrade;
+	    #proxy_set_header Connection $connection_upgrade;
+	    proxy_ssl_verify off;
+	    proxy_ssl_server_name on;
+        #proxy_set_header Host $host;
+        #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_read_timeout 240s;
+    }
+    location ~ ^/msf(.*) {
+ 	proxy_pass https://127.0.0.1:4445;
+    }
 }
 ```
 

@@ -3,10 +3,10 @@
 
 
 
-* [Notes](../../knowledge/pe/_notes.md)
-    * [Image Access Functions](../../knowledge/pe/_notes.md#image-access-functions)
-    * [PE loader](../../knowledge/pe/_notes.md#pe-loader)
-    * [Memory aligment](../../knowledge/pe/_notes.md#memory-aligment)
+* [Notes](../../knowledge/portable_executable/_notes.md)
+    * [Image Access Functions](../../knowledge/portable_executable/_notes.md#image-access-functions)
+    * [PE loader](../../knowledge/portable_executable/_notes.md#pe-loader)
+    * [Memory aligment](../../knowledge/portable_executable/_notes.md#memory-aligment)
 
 # Notes
 

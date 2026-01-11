@@ -171,7 +171,6 @@ void someFunction(DWORD maxTries) {
 }
 ```
 
-
 ## Extensions
 
 ### Extension introduction
@@ -229,7 +228,7 @@ int Execute(char* argsBuffer, uint32_t bufferSize, goCallback callback)
 }
 ```
 
-create a dundle:
+create a bundle:
 ```json
 {
     "name": "...",

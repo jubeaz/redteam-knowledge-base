@@ -3,9 +3,9 @@
 
 
 
-* [Relocation section (.reloc)](../../knowledge/pe/reloc.md)
-    * [Introduction](../../knowledge/pe/reloc.md#introduction)
-    * [Relocating](../../knowledge/pe/reloc.md#relocating)
+* [Relocation section (.reloc)](../../knowledge/portable_executable/reloc.md)
+    * [Introduction](../../knowledge/portable_executable/reloc.md#introduction)
+    * [Relocating](../../knowledge/portable_executable/reloc.md#relocating)
 
 # Relocation section (.reloc)
 ## Introduction
